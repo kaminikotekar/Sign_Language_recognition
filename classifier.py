@@ -58,7 +58,7 @@ test_set= test_datagen.flow_from_directory(
                                             class_mode='categorical')
 
 classifier.fit_generator(training_set,
-                         steps_per_epoch=290,
-                         nb_epoch=1,
+                         samples_per_epoch =87000,
+                         nb_epoch=5,
                          validation_data=test_set,
                          nb_val_samples=28)
