@@ -23,7 +23,7 @@ classifier.add(Convolution2D(32, (3, 3), activation="relu"))
 
 classifier.add(MaxPooling2D( pool_size=(2,2), strides=2, padding= 'valid'))
 
-#Flattening
+#Flattenin=\]45
 classifier.add(Flatten())
 
 #Full-connection step
@@ -62,3 +62,5 @@ classifier.fit_generator(training_set,
                          nb_epoch=5,
                          validation_data=test_set,
                          nb_val_samples=28)
+
+classifier.save('conv_model.h5')
