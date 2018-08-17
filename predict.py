@@ -10,28 +10,32 @@ import cv2
 import numpy as np
 import os
 
-model= load_model('conv_model.h5')
-
-model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-
-os.chdir('.\\screens')
-
-
-img_list=[]
-for files in os.listdir('.\\'):
-    i=1
-    print(files)
-    img=cv2.imread(files)
-    img=cv2.resize(img,(64,64))
-    img_list.append(img)
+def set_model():
     
+    model= load_model('conv_model.h5')
+    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+    return model
 
-a=np.array(img_list)
-classes=model.predict_classes(a)
 
 
-img1=cv2.imread('1alpha.png')
-#img2=cv2.imread('testB.jpg')
+
+def prediction(model):
+    
+    os.chdir('.\\screens')
+    img_list=[]
+    for files in os.listdir('.\\'):
+        print(files)
+        img=cv2.imread(files)
+        img=cv2.resize(img,(64,64))
+        img_list.append(img)
+    
+    os.chdir('..\\')
+    a=np.array(img_list)
+    classes=model.predict_classes(a)
+    print(classes)
+
+
+##img2=cv2.imread('testB.jpg')
 #img1=cv2.resize(img1,(64,64))
 #img2=cv2.resize(img2,(64,64))
 #img1=np.expand_dims(img1, axis=0)
