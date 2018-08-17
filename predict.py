@@ -9,6 +9,8 @@ from keras.models import load_model
 import cv2
 import numpy as np
 import os
+from keras.preprocessing.image import ImageDataGenerator
+from Label import label_generator
 
 def set_model():
     
@@ -24,15 +26,19 @@ def prediction(model):
     os.chdir('.\\screens')
     img_list=[]
     for files in os.listdir('.\\'):
-        print(files)
+        #print(files)
         img=cv2.imread(files)
         img=cv2.resize(img,(64,64))
         img_list.append(img)
     
     os.chdir('..\\')
+    
     a=np.array(img_list)
-    classes=model.predict_classes(a)
-    print(classes)
+    predictions=model.predict_classes(a)
+    #print(classes)
+    labels= label_generator()
+    final_predictions=predictions = [labels[k] for k in predictions]
+    print(final_predictions)
 
 
 ##img2=cv2.imread('testB.jpg')
@@ -42,9 +48,20 @@ def prediction(model):
 #img2=np.expand_dims(img2, axis=0)
 
 #listl=[]
+    
+    
+    
+    
+
 #listl.append(img1)
 #listl.append(img2)
 #a=np.array(listl)
 #classes=model.predict_classes(a) 
+
+
+#model.evaluate_generator(generator=test_set)
+#test_set.reset()
+#pred=model.predict_generator(test_set,verbose=1)
+#predicted_class_indices=np.argmax(pred,axis=1)
 
 
