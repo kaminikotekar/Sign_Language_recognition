@@ -64,3 +64,4 @@ classifier.fit_generator(training_set,
                          nb_val_samples=28)
 
 classifier.save('conv_model.h5')
+model.evaluate_generator(generator=test_set)
