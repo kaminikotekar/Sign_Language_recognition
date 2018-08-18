@@ -39,6 +39,18 @@ def prediction(model):
     labels= label_generator()
     final_predictions=predictions = [labels[k] for k in predictions]
     print(final_predictions)
+    
+    
+def pred_image_only(model, img):
+    
+    pred_image=cv2.resize(img,(64,64))
+    pred_image=np.expand_dims(pred_image, axis=0)
+    predictions=model.predict_classes(pred_image)
+    labels= label_generator()
+    final_predictions=[labels[k] for k in predictions]
+    print(final_predictions)
+    font = cv2.FONT_HERSHEY_SIMPLEX
+    cv2.putText(img, final_predictions[0], (2,100), font, 2, (255, 0,0 ), 2, cv2.LINE_AA)
 
 
 ##img2=cv2.imread('testB.jpg')
